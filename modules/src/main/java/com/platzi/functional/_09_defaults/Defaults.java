@@ -2,7 +2,7 @@ package com.platzi.functional._09_defaults;
 
 import java.util.Date;
 
-public class Defaults {
+public class  Defaults {
     @FunctionalInterface
     interface Operational {
         int operate(String s);
