@@ -37,11 +37,31 @@ public class Streams {
 
         /**No se pueden ustilizar mas stream en llamados
          * cada vez que se haga un comportamiento con alguno de
-         * ellos lo consume y ya no nos sirve*/
+         * ellos lo consume y ya no nos sirve lo interesante aqui
+         * es que no tenemos que almacenar los datos sino que con esta
+         * clase y este patron nos ayudan a ejecutar ciertos requerimientos
+         * o trasnformaciones directamente en el objeto
+         *
+         * Los Streams tienen dos tipos de operaciones
+         * Intermedias -> Genera un nuevo stream
+         * Terminales -> Generan un dato final ya que se interactua
+         *  directamente con el objeto por ejemplo foreach*/
 
         Stream<String> emphasisCorses = courseStream.map( course -> course + "!");
         Stream<String> calculoCourse = emphasisCorses.filter( course -> course.contains("Calculo"));
 
         calculoCourse.forEach(System.out::println);
+
+        System.out.println("");
+
+        /**En este caso es muy parecido a el codigo anterior
+         * pero todo funciona en la misma instancia y se
+         * usa bajo el patron Chaining o cadena*/
+        Stream<String> courseStream2 = courseList.stream();
+
+        courseStream2.map( course -> course + "!!")
+                .filter( course -> course.contains("Calculo"))
+                .forEach(System.out::println);
+
     }
 }
