@@ -3,7 +3,6 @@ package com.platzi.functional._15_streams_intro;
 import com.platzi.functional._06_reference_operator.NombresUtils;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Stream;
 
 public class Streams {
@@ -63,5 +62,82 @@ public class Streams {
                 .filter( course -> course.contains("Calculo"))
                 .forEach(System.out::println);
 
+        Persona persona = new Persona(1,"Daniel","Aristizabal",
+                5484840);
+        Persona persona1 = new Persona(2,"Jose","Aristizabal",
+                5484840);
+        Persona persona2 = new Persona(2,"Joselito","Perez",
+                5484840);
+
+        List<Persona> personas = NombresUtils.getList(
+             persona, persona1
+        );
+
+        Stream<Persona> buscarPersonas = personas.stream();
+
+        getPersons(
+                buscarPersonas.filter( person -> person.apellido.contains("Aristizabal"))
+                ).forEach(System.out::println);
+    }
+
+    static <T> Stream<T> getPersons(Stream<T> stream){
+        return stream.peek( data -> data.toString());
+    }
+
+    static class Persona {
+        private int id;
+        private String nombre;
+        private String apellido;
+        private long telefono;
+
+
+        public Persona(int id, String nombre, String apellido, long telefono){
+            this.id = id;
+            this.nombre = nombre;
+            this.apellido = apellido;
+            this.telefono = telefono;
+        }
+
+        @Override
+        public String toString() {
+            return "Persona{" +
+                    "id=" + id +
+                    ", nombre='" + nombre + '\'' +
+                    ", apellido='" + apellido + '\'' +
+                    ", telefono=" + telefono +
+                    '}';
+        }
+
+        public int getId() {
+            return id;
+        }
+
+        public void setId(int id) {
+            this.id = id;
+        }
+
+        public String getNombre() {
+            return nombre;
+        }
+
+        public void setNombre(String nombre) {
+            this.nombre = nombre;
+        }
+
+        public String getApellido() {
+            return apellido;
+        }
+
+        public void setApellido(String apellido) {
+            this.apellido = apellido;
+        }
+
+        public long getTelefono() {
+            return telefono;
+        }
+
+        public void setTelefono(long telefono) {
+            this.telefono = telefono;
+        }
     }
 }
